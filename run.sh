@@ -1,6 +1,6 @@
 apt update
 apt full-upgrade -y
-apt install unzip
+apt install unzip -y
 wget https://github.com/oobabooga/text-generation-webui/releases/download/installers/oobabooga_linux.zip
 unzip oobabooga_linux.zip
 rm -rf oobabooga_linux.zip
