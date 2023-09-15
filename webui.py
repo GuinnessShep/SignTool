@@ -79,38 +79,8 @@ def clear_cache():
 
 
 def install_dependencies():
-    # Select your GPU or, choose to run in CPU mode
-    print("What is your GPU")
-    print()
-    print("A) NVIDIA")
-    print("B) AMD (Linux/MacOS only. Requires ROCm SDK 5.4.2/5.4.3 on Linux)")
-    print("C) Apple M Series")
-    print("D) None (I want to run models in CPU mode)")
-    print()
-    gpuchoice = input("Input> ").lower()
-    while gpuchoice not in ['a', 'b', 'c', 'd']:
-        print("Invalid choice. Please try again.")
-        gpuchoice = input("Input> ").lower()
-
-    if gpuchoice == "d":
-        print_big_message("Once the installation ends, make sure to open CMD_FLAGS.txt with\na text editor and add the --cpu flag.")
-
-    # Install the version of PyTorch needed
-    if gpuchoice == "a":
-        run_cmd('conda install -y -k cuda ninja git -c nvidia/label/cuda-11.7.0 -c nvidia && python -m pip install torch==2.0.1+cu117 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117', assert_success=True, environment=True)
-    elif gpuchoice == "b" and not sys.platform.startswith("darwin"):
-        if sys.platform.startswith("linux"):
-            run_cmd('conda install -y -k ninja git && python -m pip install torch==2.0.1+rocm5.4.2 torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.4.2', assert_success=True, environment=True)
-        else:
-            print("AMD GPUs are only supported on Linux. Exiting...")
-            sys.exit()
-    elif (gpuchoice == "c" or gpuchoice == "b") and sys.platform.startswith("darwin"):
-        run_cmd("conda install -y -k ninja git && python -m pip install torch torchvision torchaudio", assert_success=True, environment=True)
-    elif gpuchoice == "d" or gpuchoice == "c":
-        if sys.platform.startswith("linux"):
-            run_cmd("conda install -y -k ninja git && python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu", assert_success=True, environment=True)
-        else:
-            run_cmd("conda install -y -k ninja git && python -m pip install torch torchvision torchaudio", assert_success=True, environment=True)
+    # NVIDIA
+    run_cmd('conda install -y -k cuda ninja git -c nvidia/label/cuda-11.7.0 -c nvidia && python -m pip install torch==2.0.1+cu117 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117', assert_success=True, environment=True)
 
     # Clone webui to our computer
     run_cmd("git clone https://github.com/oobabooga/text-generation-webui.git", assert_success=True, environment=True)
