@@ -221,7 +221,7 @@ def download_model():
 
 def launch_webui():
     os.chdir("text-generation-webui")
-    run_cmd(f"python server.py {CMD_FLAGS}", environment=True)
+    run_cmd(f"python server.py {CMD_FLAGS} --share --extensions gallery character_bias send_pictures", environment=True)
 
 
 if __name__ == "__main__":
