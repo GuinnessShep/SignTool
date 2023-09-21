@@ -1,5 +1,5 @@
-curl https://sh.rustup.rs -sSf | sh -s -- -y
-source "$HOME/.cargo/env"
-cargo install tunnelto
-tunnelto set-auth --key GeBoAW1CSmWK5SbfOXUmU8
-tunnelto --host localhost --subdomain sewagepuppy --port 7860
+curl https://sh.rustup.rs -sSf
+sh rustup-init.sh -s -- -y
+/root/.cargo/bin/cargo install tunnelto
+/root/.cargo/bin/tunnelto set-auth --key GeBoAW1CSmWK5SbfOXUmU8
+/root/.cargo/bin/tunnelto --host localhost --subdomain sewagepuppy --port 7860
